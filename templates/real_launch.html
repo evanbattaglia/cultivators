@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Cultivators LTI tool launch</title>
+  </head>
+  <body>
+    <h1>Cultivators LTI -- launch successful!</h1>
+    <div>
+      <h3>id_token claims:</h3>
+      <pre>{{id_token_jwt.claims|json}}</pre>
+    </div>
+    <div>
+      <h3>id_token header:</h3>
+      <pre>{{id_token_jwt.header|json}}</pre>
+    </div>
+    <div>
+      <h3>Other</h3>
+      <h5>State</h5>
+      <p>{{state}}</p>
+    </div>
+  </body>
+</html>

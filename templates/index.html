@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- simple random ai-generated page, feel free to rewrite -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultivators LTI tool main page</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background-color: #f4f7fc;
+        }
+        .container {
+          background: white;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          width: 300px;
+          text-align: center;
+        }
+        .url-box {
+          padding: 10px;
+          font-size: 14px;
+          background-color: #f1f1f1;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          margin-bottom: 15px;
+          color: #555;
+          word-wrap: break-word;
+        }
+        .copy-button {
+          background-color: #007bff;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+        }
+        .copy-button:hover {
+          background-color: #0056b3;
+        }
+        .copy-button:active {
+          background-color: #003f7f;
+        }
+    </style>
+  </head>
+  <body>
+
+    <div>
+      <div class="container">
+        <div>Dynamic Registration Url:</div>
+        <input id="dyn-reg-url" class="url-box" type="text" value="{{ dynamic_registration_uri }}" readonly />
+        <button class="copy-button" onclick="copyDynRegToClipboard()">Copy URL</button>
+        <div id="dynreg-notification"></div>
+      </div>
+    </div>
+    <div>
+      <div class="container">
+        <div><a href="{{ public_jwk_set_url }}">Public JWK Set Url:</a></div>
+        <input id="jwks-url" class="url-box" type="text" value="{{ public_jwk_set_url }}" readonly />
+        <button class="copy-button" onclick="copyJwksToClipboard()">Copy URL</button>
+        <div id="jwkset-notification"></div>
+      </div>
+    </div>
+
+    <script>
+      function copyToCliboard(fieldID, notificationFieldId) {
+        const urlField = document.getElementById(fieldID);
+        urlField.select();
+        urlField.setSelectionRange(0, 99999); // For mobile devices
+        document.execCommand('copy'); // Copy the text to clipboard
+
+        document.getElementById(notificationFieldId).innerText = 'URL copied to clipboard';
+        setTimeout(() => {
+          document.getElementById(notificationFieldId).innerText = '';
+        }, 3000);
+      }
+      function copyDynRegToClipboard() {
+        copyToCliboard('dyn-reg-url', 'dynreg-notification');
+      }
+      function copyJwksToClipboard() {
+        copyToCliboard('jwks-url', 'jwkset-notification');
+      }
+    </script>
+
+  </body>
+</html>

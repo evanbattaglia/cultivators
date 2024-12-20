@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <title>Cultivators LTI tool launch in progress</title>
+  </head>
+  <body>
+    <div id="notification">Getting launch validator from LTI platform storage...</div>
+  </body>
+  <script>
+    const state = {{state|json|safe}};
+    const idToken = {{id_token|json|safe}};
+    const realLaunchUri = {{real_launch_uri|json|safe}};
+    const ltiStorageTarget = {{lti_storage_target|json|safe}};
+    const messageId = Math.random().toString(36).substring(7);
+
+    function replaceDocument(html) {
+      document.open();
+      document.write(html);
+      document.close();
+    }
+
+    function makeRealLaunchRequest(launchIntegrityValidator, origin) {
+      // TODO use real launch URI
+      return fetch(realLaunchUri, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Cultivators-Launch-Integrity-Validator": launchIntegrityValidator,
+        },
+        body: JSON.stringify({state, id_token: idToken, origin}),
+      });
+    }
+
+    function handleError(error) {
+      let e;
+      try {
+        e = JSON.stringify(error);
+      } catch (e) {
+        e = e.toString();
+      }
+      document.getElementById("notification").innerText = "Error: " + e;
+    }
+
+    async function continueLaunch({launchIntegrityValidator, error, origin}) {
+      try {
+        if (error) { 
+          throw new Error("Failed to get postmessage data: " + error);
+        }
+        const response = await makeRealLaunchRequest(launchIntegrityValidator, origin);
+        if (response.ok) {
+          const html = await response.text();
+          replaceDocument(html);
+        } else {
+          throw new Error("Failed to continue launch: " + response.status);
+        }
+      } catch (e) {
+        handleError(e);
+      }
+    }
+
+    window.addEventListener("message", function(event) {
+      const {data, origin} = event;
+      console.log("Cultivators: received message", event);
+      if (data) {
+        const {subject, error, key, value} = data;
+        if (subject === "lti.get_data.response" && key == state && !error) {
+          const launchIntegrityValidator = value;
+          continueLaunch({launchIntegrityValidator, origin, error});
+        }
+      }
+    });
+
+    function requestValidatorFromPlatformStorage() {
+      const parent = window.parent || window.top;
+      const win = (parent[ltiStorageTarget] || parent);
+      const msg = {
+        subject: "lti.get_data",
+        key: state,
+        message_id: messageId,
+      };
+      console.log("Cultivators: sending message to platform storage", msg, win);
+      win.postMessage(msg, '*');
+    }
+
+    requestValidatorFromPlatformStorage();
+  </script>
+</html>

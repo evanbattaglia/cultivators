@@ -1,0 +1,95 @@
+{
+  "application_type": "web",
+  "client_id": "10000000000486",
+  "client_name": "Cultivators Rust LTI Tool",
+  "grant_types": [
+    "client_credentials",
+    "implicit"
+  ],
+  "https://purl.imsglobal.org/spec/lti-tool-configuration": {
+    "claims": [
+      "iss",
+      "sub"
+    ],
+    "custom_parameters": {},
+    "description": "Cultivators Rust LTI Tool",
+    "domain": "localhost",
+    "https://canvas.instructure.com/lti/registration_config_url": "http://canvas-web.inst.test/api/lti/registrations/10000000000107/view",
+    "messages": [
+      {
+        "placements": [
+          "https://canvas.instructure.com/lti/account_navigation",
+          "https://canvas.instructure.com/lti/analytics_hub",
+          "https://canvas.instructure.com/lti/assignment_edit",
+          "https://canvas.instructure.com/lti/assignment_group_menu",
+          "https://canvas.instructure.com/lti/assignment_index_menu",
+          "https://canvas.instructure.com/lti/assignment_menu",
+          "https://canvas.instructure.com/lti/assignment_selection",
+          "https://canvas.instructure.com/lti/assignment_view",
+          "https://canvas.instructure.com/lti/collaboration",
+          "https://canvas.instructure.com/lti/conference_selection",
+          "https://canvas.instructure.com/lti/course_assignments_menu",
+          "https://canvas.instructure.com/lti/course_home_sub_navigation",
+          "https://canvas.instructure.com/lti/course_navigation",
+          "https://canvas.instructure.com/lti/course_settings_sub_navigation",
+          "https://canvas.instructure.com/lti/discussion_topic_index_menu",
+          "https://canvas.instructure.com/lti/discussion_topic_menu",
+          "https://canvas.instructure.com/lti/file_index_menu",
+          "https://canvas.instructure.com/lti/file_menu",
+          "https://canvas.instructure.com/lti/global_navigation",
+          "https://canvas.instructure.com/lti/homework_submission",
+          "https://canvas.instructure.com/lti/link_selection",
+          "https://canvas.instructure.com/lti/migration_selection",
+          "https://canvas.instructure.com/lti/module_group_menu",
+          "https://canvas.instructure.com/lti/module_index_menu",
+          "https://canvas.instructure.com/lti/module_index_menu_modal",
+          "https://canvas.instructure.com/lti/module_menu_modal",
+          "https://canvas.instructure.com/lti/module_menu",
+          "https://canvas.instructure.com/lti/post_grades",
+          "https://canvas.instructure.com/lti/quiz_index_menu",
+          "https://canvas.instructure.com/lti/quiz_menu",
+          "https://canvas.instructure.com/lti/similarity_detection",
+          "https://canvas.instructure.com/lti/student_context_card",
+          "https://canvas.instructure.com/lti/submission_type_selection",
+          "https://canvas.instructure.com/lti/tool_configuration",
+          "https://canvas.instructure.com/lti/top_navigation",
+          "https://canvas.instructure.com/lti/user_navigation",
+          "https://canvas.instructure.com/lti/wiki_index_menu",
+          "https://canvas.instructure.com/lti/wiki_page_menu",
+          "ContentArea"
+        ],
+        "type": "LtiResourceLinkRequest"
+      },
+      {
+        "placements": [
+          "https://canvas.instructure.com/lti/assignment_selection",
+          "https://canvas.instructure.com/lti/collaboration",
+          "https://canvas.instructure.com/lti/conference_selection",
+          "https://canvas.instructure.com/lti/course_assignments_menu",
+          "https://canvas.instructure.com/lti/editor_button",
+          "https://canvas.instructure.com/lti/homework_submission",
+          "https://canvas.instructure.com/lti/link_selection",
+          "https://canvas.instructure.com/lti/migration_selection",
+          "https://canvas.instructure.com/lti/module_index_menu_modal",
+          "https://canvas.instructure.com/lti/module_menu_modal",
+          "https://canvas.instructure.com/lti/submission_type_selection",
+          "ContentArea",
+          "RichTextEditor"
+        ],
+        "type": "LtiDeepLinkingRequest"
+      }
+    ],
+    "target_link_uri": "http://localhost:3330/launch"
+  },
+  "initiate_login_uri": "http://localhost:3330/login/todo-real-uuid",
+  "jwks_uri": "https://gist.githubusercontent.com/evanbattaglia/9bbb55fe012583dc6244b9eeca474df4/raw/f6d619285487be3d6fe51e087f183448130e1329/public.jwks",
+  "logo_uri": null,
+  "redirect_uris": [
+    "http://localhost:3330/launch"
+  ],
+  "response_types": [
+    "id_token"
+  ],
+  "scope": "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly https://purl.imsglobal.org/spec/lti-ags/scope/score https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly https://purl.imsglobal.org/spec/lti/scope/noticehandlers https://purl.imsglobal.org/spec/lti/scope/asset.readonly https://purl.imsglobal.org/spec/lti/scope/report https://purl.imsglobal.org/spec/lti/scope/eula https://canvas.instructure.com/lti/public_jwk/scope/update https://canvas.instructure.com/lti/account_lookup/scope/show https://canvas.instructure.com/lti-ags/progress/scope/show https://canvas.instructure.com/lti/page_content/show",
+  "token_endpoint_auth_method": "private_key_jwt"
+}

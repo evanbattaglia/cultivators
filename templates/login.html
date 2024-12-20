@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <title>Cultivators LTI tool launch in progress</title>
+  </head>
+  <body>
+    <div id="notification">
+      <p>Launching Cultivators LTI tool... If this message lasts more than a few seconds, your platform may not support LTI Platform Storage.</p>
+    </div>
+    <script>
+      const redirectUri = {{platform_authorize_uri|json|safe}};
+      const integrityValidator = {{launch_integrity_validator|json|safe}};
+      const state = {{state|json|safe}};
+      const messageId = Math.random().toString(36).substring(7);
+      const ltiStorageTarget = {{lti_storage_target|json|safe}};
+
+      function continueLaunch() {
+        document.getElementById('notification').innerHTML = 'Continuing launch...';
+        window.location.href = redirectUri;
+      }
+
+      function handlePostMessageFailure(error) {
+        document.getElementById('notification').innerText = 'Error: ' + JSON.stringify(error);
+      }
+
+      function setUpPostMessageListener() {
+        window.addEventListener('message', function(event) {
+          console.log("Cultivators: received message", event);
+          if (event.data && event.data.subject === 'lti.put_data.response' && event.data.message_id == messageId) {
+            if (event.data.error) {
+              handlePostMessageFailure(event.data.error);
+            } else {
+              continueLaunch();
+            }
+          }
+        });
+      }
+
+      function sendPostMessage() {
+        const parent = window.parent || window.top;
+        const win = (parent[ltiStorageTarget] || parent);
+        const origin = new URL(redirectUri).origin;
+        const msg = {
+          subject: 'lti.put_data',
+          key: state,
+          message_id: messageId,
+          value: integrityValidator,
+        };
+        win.postMessage(msg, origin);
+      }
+
+      setUpPostMessageListener();
+      sendPostMessage();
+    </script>
+  </body>
+</html>
+

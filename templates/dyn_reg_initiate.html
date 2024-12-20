@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Cultivators LTI tool Install</title>
+    <style type="text/css">
+      .culti-dynreg-json {
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <script>
+    function ltiClose() {
+      (window.parent || window.opener).postMessage({subject: "org.imsglobal.lti.close"}, "*");
+    }
+    function copyClientId() {
+      var copyText = document.querySelector("input");
+      copyText.select();
+      document.execCommand("copy");
+    }
+  </script>
+  <body>
+    <h2>LTI Key has been registered!</h1>
+    <button onclick="ltiClose()">Continue in Platform</button>
+    <h3><code>client_id</code> as assigned by platform</h3>
+    <p>Canvas or other platforms may have you install the app by pasting in the following <code>client_id</code>:</p>
+    <input type="text" value="{{ client_id }}" readonly>
+    <a href="javascript:void(0)" onclick="copyClientId()" alt="Copy to clipboard"> 📋 Copy</a>
+    <h3>Platform OAuth Configuration</h3>
+    <pre class="culti-dynreg-json">{{ oauth_configuration_str }}</pre>
+    <h3>Platform LTI Registration Response</h3>
+    <pre class="culti-dynreg-json">{{ registration_resp_str }}</pre>
+  </body>
+</html>
