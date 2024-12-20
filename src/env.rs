@@ -9,7 +9,7 @@ pub fn init_env() {
         Ok(_) =>
             eprintln!("Cultivators: using settings from: compiled binary + .env file + overrides in environment"),
         Err(_) =>
-            eprintln!("Cultivators: no .env file exists, using settings from: .env file + overrides in environment"),
+            eprintln!("Cultivators: no .env file exists, using settings from: compiled binary + overrides in environment"),
     }
     dotenvy::from_read(COMPILED_ENV.as_bytes()).unwrap();
 }

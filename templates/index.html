@@ -6,24 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cultivators LTI tool main page</title>
     <style>
-        body {
-          font-family: Arial, sans-serif;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          margin: 0;
-          background-color: #f4f7fc;
-        }
-        .container {
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          padding: 20px;
-          width: 300px;
-          text-align: center;
-        }
-        .url-box {
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column; /* Stack containers vertically */
+      justify-content: flex-start; /* Align from the top */
+      align-items: center; /* Center the containers horizontally */
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f7fc;
+      padding-top: 20px; /* Add space above the first container */
+    }
+    .container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 500px;
+      text-align: center;
+      margin-bottom: 20px; /* Add space between containers */
+    }
+    .container2 {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      margin-bottom: 20px; /* Add space between containers */
+    }
+    .url-box {
           padding: 10px;
           font-size: 14px;
           background-color: #f1f1f1;
@@ -54,18 +66,32 @@
 
     <div>
       <div class="container">
-        <div>Dynamic Registration Url:</div>
-        <input id="dyn-reg-url" class="url-box" type="text" value="{{ dynamic_registration_uri }}" readonly />
+        <h2>Dynamic Registration Url:</h2>
+        <div>Copy this URL and initiate the registration process with your LMS.</div>
+        <div>
+          <input id="dyn-reg-url" class="url-box" type="text" value="{{ dynamic_registration_uri }}" readonly />
+        </div>
+        <div>
         <button class="copy-button" onclick="copyDynRegToClipboard()">Copy URL</button>
+        </div>
         <div id="dynreg-notification"></div>
       </div>
     </div>
     <div>
-      <div class="container">
-        <div><a href="{{ public_jwk_set_url }}">Public JWK Set Url:</a></div>
-        <input id="jwks-url" class="url-box" type="text" value="{{ public_jwk_set_url }}" readonly />
-        <button class="copy-button" onclick="copyJwksToClipboard()">Copy URL</button>
-        <div id="jwkset-notification"></div>
+      <div class="container2">
+        <h3><a href="{{ public_jwk_set_url }}">Public JWK Set Url:</a></h3>
+        <small>
+          <div>
+            These may be needed for certain platforms or when using AGS services (see README). Otherwise, this can be ignored.
+          </div>
+          <div>
+          <input id="jwks-url" class="url-box" type="text" value="{{ public_jwk_set_url }}" readonly />
+          </div>
+          <div>
+          <button class="copy-button" onclick="copyJwksToClipboard()">Copy URL</button>
+          </div>
+          <div id="jwkset-notification"></div>
+        </small>
       </div>
     </div>
 

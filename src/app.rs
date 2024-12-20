@@ -108,10 +108,10 @@ async fn serve_ssl(app: Router, setup_app_logging: impl FnOnce()) {
     let config = RustlsConfig::from_pem(cert_pem, key_pem).await.unwrap();
     let addr = bind_addr();
     info!("Cultivators running with TLS on https://{addr:?}");
-    info!(
-        "Dynamic registration URL: {}",
-        crate::app_uris::dyn_reg_initiation_uri()
-    );
+    info!("\x1b[1;32mWelcome to Cultivators!\x1b[0m");
+    info!("To start, visit: {}", crate::env::base_url());
+    info!("(Click 'Advanced' -> 'Accept'/'Proceed' to ignore SSL error)");
+    info!("For more info, see {}", env!("CARGO_PKG_HOMEPAGE"));
     let server = axum_server::bind_rustls(bind_addr(), config).serve(app.into_make_service());
     setup_app_logging();
     server.await.unwrap();
@@ -122,10 +122,13 @@ async fn serve_http(app: Router, setup_app_logging: impl FnOnce()) {
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     info!("Cultivators running HTTP (without TLS) at http://{addr:?}");
     info!(
-        "Dynamic registration URL: {}",
+        "Or go to platform and use Dynamic registration URL: {}",
         crate::app_uris::dyn_reg_initiation_uri()
     );
+    info!("\x1b[1;32mWelcome to Cultivators!\x1b[0m");
+    info!("To start, visit: {}", crate::env::base_url());
     info!("(re-run with CULTIVATORS_USE_TLS=true or --tls to enable TLS)");
+    info!("For more info, see {}", env!("CARGO_PKG_HOMEPAGE"));
     let server = axum::serve(listener, app);
     setup_app_logging();
     server.await.unwrap();
