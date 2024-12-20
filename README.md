@@ -4,6 +4,8 @@ Cultivators (or "cuLTIvatoRS") is a Rust-based example LTI 1.3 tool. Its focus i
 
 [LTI](https://www.imsglobal.org/activity/learning-tools-interoperability) is a standard for integrating third-party tools with Learning Management Systems (LMSs). [LTI 1.3](https://www.imsglobal.org/spec/lti/v1p3) is the latest version of the standard, and it is based on [OAuth2 and JWTs](https://www.imsglobal.org/spec/security/v1p0), and uses a flow called [Dynamic Registration](https://www.imsglobal.org/spec/security/v1p0/#dynamic-registration) for users to initiate setup of tools within an LMS.
 
+NOTE: Cultivators is a hobby project, written partially as a way for me to learn Rust. I am not a Rust expert, and code may not meet general standards (for instance, as of Dec 2024 there are no automated tests). Use at your own risk!
+
 ## Quickstart
 
 ```
