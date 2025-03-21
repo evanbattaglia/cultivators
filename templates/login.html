@@ -36,6 +36,7 @@
       }
 
       function sendPostMessage() {
+        console.log("SENDING MESSAGE");
         const parent = window.parent || window.top;
         const win = (parent[ltiStorageTarget] || parent);
         const origin = new URL(redirectUri).origin;
@@ -45,7 +46,12 @@
           message_id: messageId,
           value: integrityValidator,
         };
-        win.postMessage(msg, origin);
+        // Seems to be some kind of race condition...
+        // TODO make setInterval until get msg back
+        setTimeout(
+          () => win.postMessage(msg, origin),
+          1000
+        );
       }
 
       setUpPostMessageListener();
