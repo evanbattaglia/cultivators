@@ -63,7 +63,7 @@ pub fn base_url() -> String {
 pub static BASE_URL_CACHED: Lazy<String> = Lazy::new(base_url);
 
 pub fn base_url_domain() -> String {
-    url::Url::parse(&*BASE_URL_CACHED)
+    url::Url::parse(&BASE_URL_CACHED)
         .expect("CULTIVATORS_BASE_URL (or generated from CULTIVATORS_BIND_ADDRESS) must be a valid URL")
         .host_str()
         .expect("CULTIVATORS_BASE_URL (or generated from CULTIVATORS_BIND_ADDRESS) must have a host")

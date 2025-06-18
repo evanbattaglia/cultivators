@@ -33,9 +33,10 @@ pub fn get_dynamic_registration(
 pub fn get_dynamic_registration_default_messages(registration_id: &str) -> DynamicRegistration {
     let message = DynRegLtiMessage {
         message_type: "LtiResourceLinkRequest".to_string(),
-        placements: vec![],
+        placements: None,
         target_link_uri: None,
         label: None,
+        custom_parameters: HashMap::new(),
     };
     get_dynamic_registration(registration_id, vec![message], vec![])
 }

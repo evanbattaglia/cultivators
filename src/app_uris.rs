@@ -14,7 +14,7 @@ pub fn dyn_reg_initiation_uri() -> String {
 }
 
 pub fn login_path(registration_id: &str) -> String {
-    format!("{}/{}", &*LOGIN_BASE_URI, registration_id)
+    format!("{}/{}", LOGIN_BASE_URI, registration_id)
 }
 
 pub fn login_uri(registration_id: &str) -> String {
@@ -23,6 +23,11 @@ pub fn login_uri(registration_id: &str) -> String {
 
 pub fn launch_uri() -> String {
     format!("{}{}", &*BASE_URL_CACHED, LAUNCH_URI)
+}
+
+pub fn launch_uri_with_message_type(msg_type: &str) -> String {
+    // TODO: should really add msg_type
+    format!("{}{}?msg_type={}", &*BASE_URL_CACHED, LAUNCH_URI, msg_type)
 }
 
 pub fn real_launch_uri() -> String {

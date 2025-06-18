@@ -35,7 +35,9 @@ pub async fn dyn_reg_initiate(
     // TODO: probably better error handling istead of just using eyre
     let oidc_conf_url = &query_params.openid_configuration;
     let oidc_conf_resp = reqwest::get(oidc_conf_url).await?;
-    let openid_configuration: PlatformOpenidConfiguration = oidc_conf_resp.json().await?;
+    // return with error if resp is non-2xx
+    let openid_configuration: PlatformOpenidConfiguration =
+        oidc_conf_resp.error_for_status()?.json().await?;
     ensure_oidc_issuer_and_conf_url_match(oidc_conf_url, &openid_configuration.issuer)?;
 
     // For later use in the template (before we consume the oauth config)

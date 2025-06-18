@@ -32,8 +32,10 @@ pub struct DynRegLtiMessage {
     pub target_link_uri: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub label: Option<String>, // not implemented: i18n -- label#ja etc.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub placements: Option<Vec<String>>,
     #[serde(default)]
-    pub placements: Vec<String>,
+    pub custom_parameters: HashMap<String, String>,
 }
 
 /// Parameters to to create a Dynamic Registration JSON blob for a Tool, as specified by the

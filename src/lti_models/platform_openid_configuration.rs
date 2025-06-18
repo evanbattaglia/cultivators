@@ -23,7 +23,7 @@ pub struct PlatformOpenidConfiguration {
 pub struct PlatformOpenidLtiMessage {
     #[serde(rename = "type")]
     pub message_type: String,
-    pub placements: Vec<String>,
+    pub placements: Option<Vec<String>>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
